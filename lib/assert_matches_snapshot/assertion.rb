@@ -10,7 +10,7 @@ module AssertMatchesSnapshot
         assert_equal response.body, IO.read(full_path)
       else
         File.open(full_path, 'w') do |snapshot_file|
-          snapshot_file.write(response_body)
+          snapshot_file.write(response.body)
         end
       end
     end
