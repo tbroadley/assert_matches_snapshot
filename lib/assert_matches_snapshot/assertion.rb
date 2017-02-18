@@ -26,7 +26,7 @@ module AssertMatchesSnapshot
     end
 
     def snapshot_file_name(key)
-      "#{controller_name}_#{action_name}_#{key}".downcase.gsub(/\W/, '_') + ".snapshot.html"
+      "#{@controller.controller_name}_#{@controller.action_name}_#{key}".downcase.gsub(/\W/, '_') + ".snapshot.html"
     end
   end
 end
