@@ -1,8 +1,6 @@
-# AssertMatchesSnapshot
+# `assert_matches_snapshot`
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/assert_matches_snapshot`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+An assertion for snapshot testing. Take a snapshot of `response.body` at any point during a Rails functional or integration test. If the contents of `response.body` later change, the assertion will fail.
 
 ## Installation
 
@@ -22,7 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the following to any Rails functional or integration test:
+
+```ruby
+assert_matches_snapshot 'after page is loaded'
+```
+
+`assert_matches_snapshot` takes one argument: a string that is used to distinguish snapshots from each other. This string should be unique across all tests for a controller-action combination.
 
 ## Development
 
@@ -32,10 +36,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/assert_matches_snapshot.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tbroadley/assert_matches_snapshot.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
