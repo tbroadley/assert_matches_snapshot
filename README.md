@@ -28,7 +28,9 @@ assert_matches_snapshot 'after page is loaded'
 
 `assert_matches_snapshot` takes one argument: a string that is used to distinguish snapshots from each other. This string should be unique across all tests for a controller-action combination.
 
-To overwrite the snapshots, set the environment variable `OVERWRITE_SNAPSHOTS=true` before running your test command.
+To overwrite the snapshots, set the environment variable `OVERWRITE_SNAPSHOTS=true` before running your test command. For example, in a Linux environment:
+
+    $ OVERWRITE_SNAPSHOTS=true rails test
 
 ## Development
 
