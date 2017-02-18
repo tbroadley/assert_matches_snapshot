@@ -7,8 +7,12 @@ include AssertMatchesSnapshot::Assertion
 
 class AssertMatchesSnapshotTest < Minitest::Test
   def setup
-    @controller_name = 'controller_name'
-    @action_name = 'action_name'
+    @controller = Controller.new('controller_name', 'action_name')
+    @response_body = '<p>Hello world</p>'
+  end
+
+  def teardown
+    FakeFS::FileSystem.clear
   end
 
   def test_that_snapshot_file_name_returns_correct_name
@@ -48,22 +52,41 @@ class AssertMatchesSnapshotTest < Minitest::Test
     end
   end
 
+  def test_that_assert_matches_snapshot_overwrites_existing_snapshot_if_argument_is_passed
+    FakeFS do
+      OverwriteSnapshots.stub :active?, false do
+        refute File.exist?(snapshot_file_full_path('key'))
+        assert_matches_snapshot('key')
+        assert File.exist?(snapshot_file_full_path('key'))
+      end
+
+      OverwriteSnapshots.stub :active?, true do
+        @response_body = '<p>Good afternoon world</p>'
+        assert_matches_snapshot('key')
+        assert_equal response.body, File.read(snapshot_file_full_path('key'))
+      end
+    end
+  end
+
   private
 
-  def controller_name
-    @controller_name
-  end
-
-  def action_name
-    @action_name
-  end
-
   def response
-    Response.new(response_body)
+    Response.new(@response_body)
   end
 
-  def response_body
-    '<p>Hello world</p>'
+  class Controller
+    def initialize(controller_name, action_name)
+      @controller_name = controller_name
+      @action_name = action_name
+    end
+
+    def controller_name
+      @controller_name
+    end
+
+    def action_name
+      @action_name
+    end
   end
 
   class Response

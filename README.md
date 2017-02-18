@@ -28,6 +28,8 @@ assert_matches_snapshot 'after page is loaded'
 
 `assert_matches_snapshot` takes one argument: a string that is used to distinguish snapshots from each other. This string should be unique across all tests for a controller-action combination.
 
+To overwrite the snapshots, pass the argument `--overwrite-snapshots` to your test command.
+
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `rake test` to run the tests, or `bundle exec guard` to run the tests every time a file is changed.

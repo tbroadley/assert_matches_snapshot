@@ -6,7 +6,7 @@ module AssertMatchesSnapshot
       FileUtils.mkpath(snapshot_file_path)
 
       full_path = snapshot_file_full_path(key)
-      if File.exists?(full_path)
+      if File.exists?(full_path) && !OverwriteSnapshots.active?
         assert_equal response.body, IO.read(full_path)
       else
         File.open(full_path, 'w') do |snapshot_file|
@@ -28,6 +28,12 @@ module AssertMatchesSnapshot
 
     def snapshot_file_name(key)
       "#{@controller.controller_name}_#{@controller.action_name}_#{key}".downcase.gsub(/\W/, '_') + ".snapshot.html"
+    end
+
+    class OverwriteSnapshots
+      def self.active?
+        ARGV.include?('--overwrite-snapshots')
+      end
     end
   end
 end
