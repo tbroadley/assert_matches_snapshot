@@ -11,6 +11,7 @@ module AssertMatchesSnapshot
       else
         File.open(full_path, 'w') do |snapshot_file|
           snapshot_file.write(response.body)
+          snapshot_file.flush
         end
       end
     end
