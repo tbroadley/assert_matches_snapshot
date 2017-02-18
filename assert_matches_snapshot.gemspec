@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["buriedunderbooks@hotmail.com"]
 
   spec.summary       = %q{An assertion for snapshot testing.}
-  spec.homepage      = "https://github.com/tbroadley/assert-matches-snapshot"
+  spec.homepage      = "https://github.com/tbroadley/assert_matches_snapshot"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
