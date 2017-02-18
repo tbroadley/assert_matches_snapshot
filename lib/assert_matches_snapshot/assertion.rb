@@ -32,7 +32,7 @@ module AssertMatchesSnapshot
 
     class OverwriteSnapshots
       def self.active?
-        ARGV.include?('--overwrite-snapshots')
+        ENV['OVERWRITE_SNAPSHOTS'] == 'true'
       end
     end
   end
